@@ -237,58 +237,157 @@ function pedirUnLibro(bookId, callback, callbackError) {
 
 // pedirUnLibro(1, 2, 3)
 
-pedirUnLibro(0, (laData) => {
-  console.log("recibiendo la data", laData)
-}, (error) => {
-  console.log("ocurrio un error :(", error)
-})
+// pedirUnLibro(0, (laData) => {
+//   console.log("recibiendo la data", laData)
+// }, (error) => {
+//   console.log("ocurrio un error :(", error)
+// })
 
-pedirUnLibro(1, (laData) => {
-  console.log("recibiendo la data", laData)
-}, (error) => {
-  console.log("ocurrio un error :(", error)
-})
+// pedirUnLibro(1, (laData) => {
+//   console.log("recibiendo la data", laData)
+// }, (error) => {
+//   console.log("ocurrio un error :(", error)
+// })
 
-pedirUnLibro(2, (laData) => {
-  console.log("recibiendo la data", laData)
-}, (error) => {
-  console.log("ocurrio un error :(", error)
-})
+// pedirUnLibro(2, (laData) => {
+//   console.log("recibiendo la data", laData)
+// }, (error) => {
+//   console.log("ocurrio un error :(", error)
+// })
 
-pedirUnLibro(3, (laData) => {
-  console.log("recibiendo la data", laData)
-}, (error) => {
-  console.log("ocurrio un error :(", error)
-})
+// pedirUnLibro(3, (laData) => {
+//   console.log("recibiendo la data", laData)
+// }, (error) => {
+//   console.log("ocurrio un error :(", error)
+// })
 
 
 // organizados con la piramide del doom!
 
-pedirUnLibro(0, (laData) => {
-  console.log("recibiendo la data", laData)
-  pedirUnLibro(1, (laData) => {
-    console.log("recibiendo la data", laData)
-    pedirUnLibro(2, (laData) => {
-      console.log("recibiendo la data", laData)
-      pedirUnLibro(3, (laData) => {
-        console.log("recibiendo la data", laData)
-      }, (error) => {
-        console.log("ocurrio un error :(", error)
-      })
-    }, (error) => {
-      console.log("ocurrio un error :(", error)
-    })
-  }, (error) => {
-    console.log("ocurrio un error :(", error)
+// pedirUnLibro(0, (laData) => {
+//   console.log("recibiendo la data", laData)
+//   pedirUnLibro(1, (laData) => {
+//     console.log("recibiendo la data", laData)
+//     pedirUnLibro(2, (laData) => {
+//       console.log("recibiendo la data", laData)
+//       pedirUnLibro(3, (laData) => {
+//         console.log("recibiendo la data", laData)
+//       }, (error) => {
+//         console.log("ocurrio un error :(", error)
+//       })
+//     }, (error) => {
+//       console.log("ocurrio un error :(", error)
+//     })
+//   }, (error) => {
+//     console.log("ocurrio un error :(", error)
+//   })
+// }, (error) => {
+//   console.log("ocurrio un error :(", error)
+// })
+
+
+
+
+
+
+
+// PROMESAS
+
+function pedirUnLibro(bookId) {
+
+  let thePromise = new Promise((resolve, reject) => {
+
+
+    setTimeout(() => {
+      const library = [
+        "1. La comunidad del anillo",
+        "2. Las dos Torres",
+        "3. El retorn del Rey"
+      ]
+      let libroAEnviar = library[bookId]
+      if (libroAEnviar === undefined) {
+        reject("El libro no existe")
+      } else {
+        resolve(libroAEnviar)
+      }
+    }, Math.random() * 3000) // 0 - 3s
+
   })
-}, (error) => {
-  console.log("ocurrio un error :(", error)
+
+  return thePromise;
+
+}
+
+// Esta es la PARTE IMPORTANTE
+
+// const algo = pedirUnLibro(0)
+// console.log(algo)
+
+// const laPromesa = pedirUnLibro(5)
+
+pedirUnLibro(0)
+.then((response) => {
+  console.log("recibiendo y leyendo:", response)
+  // en este momento, yo quiero pedir otra cosa
+  return pedirUnLibro(10)
 })
+.then((response) => {
+  console.log("recibiendo y leyendo:", response)
+  return pedirUnLibro(2)
+})
+.then((response) => {
+  console.log("recibiendo y leyendo:", response)
+  // ya tengo todos los libros
+})
+.catch((error) => {
+  console.log("error", error)
+  // return pedirUnLibro(0)
+})
+// .then((response) => {
+//   console.log("despues del catch", response)
+// })
+
+// pedirUnLibro(1)
+// .then((response) => {
+//   console.log("recibiendo y leyendo:", response)
+// })
+// .catch((error) => {
+//   console.log("error", error)
+// })
+
+// pedirUnLibro(2)
+// .then((response) => {
+//   console.log("recibiendo y leyendo:", response)
+// })
+// .catch((error) => {
+//   console.log("error", error)
+// })
 
 
+// Promise.All & Promise.allSettled
+
+// reciben un array de promesas y retornas una nueva promesa
+
+// Si una de las promesas falla, TODO falla
+// Promise.all([
+//   pedirUnLibro(0), // promesa1
+//   pedirUnLibro(10), // promesa2
+//   pedirUnLibro(2) // promesa3
+// ])
+// .then((response) => {
+//   console.log(response)
+// })
+// .catch((error) => {
+//   console.log(error)
+// })
 
 
-
-
-
-
+// Nunca falla, siempre da estado y razon de cada una de las promesas
+Promise.allSettled([
+  pedirUnLibro(1), // promesa1
+  pedirUnLibro(10), // promesa2
+  pedirUnLibro(2) // promesa3
+])
+.then((response) => {
+  console.log(response)
+})
