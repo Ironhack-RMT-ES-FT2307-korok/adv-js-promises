@@ -325,24 +325,24 @@ function pedirUnLibro(bookId) {
 
 // const laPromesa = pedirUnLibro(5)
 
-pedirUnLibro(0)
-.then((response) => {
-  console.log("recibiendo y leyendo:", response)
-  // en este momento, yo quiero pedir otra cosa
-  return pedirUnLibro(10)
-})
-.then((response) => {
-  console.log("recibiendo y leyendo:", response)
-  return pedirUnLibro(2)
-})
-.then((response) => {
-  console.log("recibiendo y leyendo:", response)
-  // ya tengo todos los libros
-})
-.catch((error) => {
-  console.log("error", error)
-  // return pedirUnLibro(0)
-})
+// pedirUnLibro(0)
+// .then((response) => {
+//   console.log("recibiendo y leyendo:", response)
+//   // en este momento, yo quiero pedir otra cosa
+//   return pedirUnLibro(10)
+// })
+// .then((response) => {
+//   console.log("recibiendo y leyendo:", response)
+//   return pedirUnLibro(2)
+// })
+// .then((response) => {
+//   console.log("recibiendo y leyendo:", response)
+//   // ya tengo todos los libros
+// })
+// .catch((error) => {
+//   console.log("error", error)
+//   // return pedirUnLibro(0)
+// })
 // .then((response) => {
 //   console.log("despues del catch", response)
 // })
@@ -383,11 +383,41 @@ pedirUnLibro(0)
 
 
 // Nunca falla, siempre da estado y razon de cada una de las promesas
-Promise.allSettled([
-  pedirUnLibro(1), // promesa1
-  pedirUnLibro(10), // promesa2
-  pedirUnLibro(2) // promesa3
-])
-.then((response) => {
-  console.log(response)
-})
+// Promise.allSettled([
+//   pedirUnLibro(1), // promesa1
+//   pedirUnLibro(10), // promesa2
+//   pedirUnLibro(2) // promesa3
+// ])
+// .then((response) => {
+//   console.log(response)
+// })
+
+
+
+// async await. try/catch
+// creamos una funcion tipo asincrona
+
+async function getData() {
+// la funcion tendrá comportamientos asincronos a resolver
+
+  try {
+    // voy a intentar hacer esto...
+
+    const response = await pedirUnLibro(0)
+    // JS ESPERA resolver la promesa de arriba, antes de continuar acá
+    console.log("desde async/await", response)
+  
+    const response2 = await pedirUnLibro(10)
+    console.log(response2)
+  
+    const response3 = await pedirUnLibro(2)
+    console.log(response3)
+  } catch(error) {
+    // .. si algo no logré hacerlo, entonces...
+    console.log(error)
+  }
+
+}
+
+getData()
+
