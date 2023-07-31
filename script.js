@@ -139,3 +139,64 @@ console.log(hobby)
 const { other: { about: { companies: [ , , h3 ] } } } = person
 
 console.log(h3)
+
+
+
+// OPERADOR SPREAD => esparcir ...
+
+
+const someNumbers = [ 1, 20, 100, 40 ];
+
+
+console.log( Math.max(...someNumbers) )
+
+console.log( ...someNumbers )
+
+const students = [ "Mercedes", "Rubén", "Uriel" ];
+const staff = [ "Pedro", "Antonio", "Ruth" ];
+
+const todos = [ ...students, ...staff, "Dani" ]
+console.log(todos)
+
+
+const somePeople = [
+  {
+    name: "Dani",
+    candy: 10,
+  },
+  {
+    name: "Anna",
+    candy: 5,
+  },
+  {
+    name: "Omar",
+    candy: 12,
+  },
+
+]
+
+console.log( ...somePeople )
+
+
+// OPERADOR REST => el resto de ...
+
+const hobbies = ["surfear", "escalar", "ver pelis", "gaming", "hechar codigo"];
+
+
+const [ hobby1, ...restOfHobbies ] = hobbies
+console.log(hobby1)
+console.log(restOfHobbies)
+
+function esMayorADiez(...allArguments) {
+
+  let sum = allArguments.reduce((acc, elem) => acc + elem, 0)
+
+  if (sum >= 10) {
+    console.log("Llego a 10")
+  } else {
+    console.log("aun no es 10 :(")
+  }
+
+}
+
+esMayorADiez(1, 1, 1, 1, 6)
