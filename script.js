@@ -421,3 +421,5 @@ async function getData() {
 
 getData()
 
+// TEST CONSOLE:LOG:
+console.log("test!")
