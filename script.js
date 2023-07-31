@@ -200,3 +200,95 @@ function esMayorADiez(...allArguments) {
 }
 
 esMayorADiez(1, 1, 1, 1, 6)
+
+
+
+// JS Asincrono
+
+function pedirUnLibro(bookId, callback, callbackError) {
+  // let bookId = 0;
+
+  // let callback = function a invocar cuando esté la data
+  // ir a una biblioteca, buscar un libro y devolverlo al usuario
+  // let libroAEnviar;
+  setTimeout(() => {
+    const library = [
+      "1. La comunidad del anillo",
+      "2. Las dos Torres",
+      "3. El retorn del Rey"
+    ]
+    let libroAEnviar = library[bookId]
+    if (libroAEnviar === undefined) {
+      callbackError("El libro no existe")
+    } else {
+      callback(libroAEnviar) // en este momento, ya tengo el libro.
+    }
+  }, Math.random() * 3000) // 0 - 3s
+
+  // return libroAEnviar;
+}
+// let libroPedido = pedirUnLibro(0)
+// console.log(libroPedido)
+
+// function recibirData(laData) {
+//   // de forma asincrona, recibir la informacion
+//   console.log("recibiendo la data", laData)
+// }
+
+// pedirUnLibro(1, 2, 3)
+
+pedirUnLibro(0, (laData) => {
+  console.log("recibiendo la data", laData)
+}, (error) => {
+  console.log("ocurrio un error :(", error)
+})
+
+pedirUnLibro(1, (laData) => {
+  console.log("recibiendo la data", laData)
+}, (error) => {
+  console.log("ocurrio un error :(", error)
+})
+
+pedirUnLibro(2, (laData) => {
+  console.log("recibiendo la data", laData)
+}, (error) => {
+  console.log("ocurrio un error :(", error)
+})
+
+pedirUnLibro(3, (laData) => {
+  console.log("recibiendo la data", laData)
+}, (error) => {
+  console.log("ocurrio un error :(", error)
+})
+
+
+// organizados con la piramide del doom!
+
+pedirUnLibro(0, (laData) => {
+  console.log("recibiendo la data", laData)
+  pedirUnLibro(1, (laData) => {
+    console.log("recibiendo la data", laData)
+    pedirUnLibro(2, (laData) => {
+      console.log("recibiendo la data", laData)
+      pedirUnLibro(3, (laData) => {
+        console.log("recibiendo la data", laData)
+      }, (error) => {
+        console.log("ocurrio un error :(", error)
+      })
+    }, (error) => {
+      console.log("ocurrio un error :(", error)
+    })
+  }, (error) => {
+    console.log("ocurrio un error :(", error)
+  })
+}, (error) => {
+  console.log("ocurrio un error :(", error)
+})
+
+
+
+
+
+
+
+
