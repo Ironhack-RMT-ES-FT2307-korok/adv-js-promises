@@ -421,5 +421,40 @@ async function getData() {
 
 getData()
 
-// TEST CONSOLE:LOG:
-console.log("test!")
+
+
+
+// Existe un funcion global para conectarse a API => fetch
+
+// siempre nos devuelve una promesa
+
+const btnNode = document.querySelector("#button")
+
+btnNode.addEventListener("click", () => {
+
+  fetch("https://api.spacexdata.com/v5/launches")
+  .then((response) => {
+    console.log(response)
+    // fetch nos devuelve la info en un formato de texto
+    return response.json() // convertir la respuesta de texto a formato de Objetos de JS
+  })
+  .then((responseObj) => {
+    console.log(responseObj)
+    const dataNode = document.querySelector("#data")
+
+    responseObj.forEach((eachLaunch) => {
+
+      const imgNode = document.createElement("img")
+      imgNode.src = eachLaunch.links.patch.small
+  
+      dataNode.append(imgNode)
+    })
+
+
+  })
+  .catch((error) => {
+    console.log(error)
+  })
+
+})
+
